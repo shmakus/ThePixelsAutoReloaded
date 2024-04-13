@@ -22,7 +22,7 @@ s.type = 'module'
 document.head.appendChild(s)
 
 // Source of the main script
-var url = "https://raw.githubusercontent.com/RGB-Outl4w/ThePixelsAutoReloaded/main/releases/release_TPAR_v4.1.1.js" + "?" + unixTime
+var url = "https://raw.githubusercontent.com/shmakus/ThePixelsAutoReloaded/main/releases/release_TPAR_v4.1.1.js" + "?" + unixTime
 
 // Check for game load every second
 var isGameLoaded = setInterval(function () {
