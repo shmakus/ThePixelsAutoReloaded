@@ -1,40 +1,43 @@
+// Функция для проверки и обновления
 async function checkAndUpdate() {
   const searchText = "% >";
   const buttonSelector = "[class^=\"BlackButtonStyled-sc\"]"; // Cache selector
 
-  // Function to click the button if available
+  // Функция для клика по кнопке, если доступно
   const clickButton = async () => {
     const button = document.querySelectorAll(buttonSelector)[1];
     if (button && !button.disabled) {
       button.click();
-      await wait(5500); // Wait for initial text
-      if (!document.body.innerText.includes(searchText)) {
-        await wait(3700); // Additional wait if needed
+      await wait(5500); // Ожидание для начального текста
+      if (!document.body || !document.body.innerText.includes(searchText)) {
+        await wait(3700); // Дополнительное ожидание при необходимости
       }
     }
   };
 
-  // Remove iframes on first run
+  // Удаление iframe при первом запуске
   const iframes = document.getElementsByTagName("iframe");
   while (iframes.length > 0) {
     iframes[0].parentNode.removeChild(iframes[0]);
   }
 
-  // Initial button click and wait
+  // Начальный клик по кнопке и ожидание
   await clickButton();
 
-  // Periodically check and click the button
+  // Периодическая проверка и клик по кнопке
   setInterval(clickButton, 500);
 }
 
-// Helper function to wait for a specified time
+// Функция для ожидания определенного времени
 function wait(time) {
   return new Promise(resolve => setTimeout(resolve, time));
 }
 
-// Suppress alerts and console logs (optional)
+// Подавление всплывающих окон и сообщений в консоли (опционально)
 window.alert = () => {};
 window.console.log = () => {};
 
-// Start the main process
-checkAndUpdate();
+// Дождитесь полной загрузки страницы перед запуском функции checkAndUpdate()
+document.addEventListener("DOMContentLoaded", function() {
+  checkAndUpdate();
+});
