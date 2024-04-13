@@ -5,12 +5,15 @@ async function checkAndUpdate() {
 
   // Функция для клика по кнопке, если доступно
   const clickButton = async () => {
-    const button = document.querySelectorAll(buttonSelector)[1];
-    if (button && !button.disabled) {
-      button.click();
-      await wait(5500); // Ожидание для начального текста
-      if (!document.body || !document.body.innerText.includes(searchText)) {
-        await wait(3700); // Дополнительное ожидание при необходимости
+    const buttons = document.querySelectorAll(buttonSelector);
+    if (buttons.length > 1) {
+      const button = buttons[1];
+      if (button && !button.disabled) {
+        button.click();
+        await wait(5500); // Ожидание для начального текста
+        if (!document.body || !document.body.innerText.includes(searchText)) {
+          await wait(3700); // Дополнительное ожидание при необходимости
+        }
       }
     }
   };
